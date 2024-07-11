@@ -17,7 +17,7 @@ export function Signup() {
     } else {
       async function CreateUser() {
         try {
-          const response = await axios.post('http://localhost:3000/signup', {
+          const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/signup`, {
             email: username,
             contact,
             password
