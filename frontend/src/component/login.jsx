@@ -35,7 +35,7 @@ export function Login() {
       <main>
         <div className="main_page">
           <div>
-          <h1>Login </h1>
+          <h1 >Login </h1>
           </div>
           <div className="login_page">
             <div className="image">

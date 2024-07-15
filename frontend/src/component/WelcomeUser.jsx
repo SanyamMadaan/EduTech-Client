@@ -50,7 +50,7 @@ export function WelcomeUser() {
                     (
                         <div className="dashboard">
                             <div className="purchase_navbar">
-                                <h1>Welcome to Edutech</h1>
+                                <h2 id="welcome_heading">Welcome to Edutech</h2>
                                 <button id="purchased_courses" onClick={() => navigate('/purchases')}>PURCHASED COURSES</button>
                             </div>
                             <h2 id="courseheading">What would you like to <span id="highlight">learn?</span></h2>

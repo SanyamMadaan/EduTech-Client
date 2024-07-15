@@ -45,7 +45,7 @@ export function Signup() {
       <div className="main_page">
       <h1>Sign Up </h1>
         <div className="login_page">
-          <div>
+          <div className="image">
             <img
               id="login_image"
               src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?size=626&ext=jpg&ga=GA1.1.2090071369.1707797469&semt=ais"
