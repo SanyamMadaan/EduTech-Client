@@ -9,8 +9,10 @@ export function Signup() {
   const [contact, setContact] = useState("");
   const [password, setPassword] = useState("");
   const [cpass, setCpass] = useState("");
+  const[btn,setBtn]=useState("Sign Up");
 
   const handleSubmit = (event) => {
+    setBtn("Creating your account...");
     event.preventDefault();
         if (cpass !== password) {
       alert("Password and Confirm Password doesn't match");
@@ -33,6 +35,7 @@ export function Signup() {
             alert('Error while creating user');
           }
         } catch (error) {
+          setBtn("Sign Up");
           alert("Error while Creating account.Please try later");
         }
       }
@@ -89,7 +92,7 @@ export function Signup() {
 
 
                 <button  type="submit">
-                  Sign Up
+                  {btn}
                 </button>
                 <br />
               </form>

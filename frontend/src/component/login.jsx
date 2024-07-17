@@ -5,12 +5,15 @@ import axios from 'axios';
 export function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const[btn,setBtn]=useState("Login");
+
   const navigate = useNavigate();
 
   async function loginUser(event) {
     event.preventDefault(); // Prevent form submission
 
     try {
+      setBtn("Logging in...");
       console.log(import.meta.env.VITE_CLIENT_BACKEND_URL);
       const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/login`, {
         email,
@@ -29,6 +32,7 @@ export function Login() {
         alert('no user exists');
       }
     } catch (error) {
+      setBtn("Login");
       console.log(error);
       if(error.response.data.msg){
         alert(error.response.data.msg)
@@ -67,7 +71,7 @@ export function Login() {
                 <br />
 
                 <button  type="submit">
-                  Login
+                  {btn}
                 </button>
                 <br />
               </form>

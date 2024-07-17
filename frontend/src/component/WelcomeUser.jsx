@@ -28,6 +28,7 @@ export function WelcomeUser() {
     }
 
     async function PurchaseCourse(courseId) {
+        alert('Redirecting you to payment page');
         const stripe=await loadStripe('pk_test_51PdRbPHu5f6jTXuNEhdNnYWdPHOA30nHPfJfHx2ViFxE9t1kNPVUNx9glblushKtdZ9BJvbdHXgSKBFlHRZ82Yl300Af88XG6Q');   
         const token = localStorage.getItem('token');
     
