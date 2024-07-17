@@ -85,8 +85,8 @@ app.post("/purchase/:courseId", async (req, res) => {
             payment_method_types: ["card"],
             line_items: CourseDetails,
             mode: "payment",
-            success_url: "http://localhost:3000/success", // Corrected 'success' URL
-            cancel_url: "http://localhost:3000/cancel",
+            success_url: "http://localhost:5173/success", // Corrected 'success' URL
+            cancel_url: "http://localhost:5173/cancel",
         });
 
         res.status(200).json({ msg: "Purchase successful", sessionId: session.id });
