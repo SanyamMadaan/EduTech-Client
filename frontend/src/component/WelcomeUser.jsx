@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import { PurchasedCourses } from "./PurchasedCourses";
+import {loadStripe} from '@stripe/stripe-js';
 
 export function WelcomeUser() {
     const [courses, setCourses] = useState([]);
@@ -27,20 +27,40 @@ export function WelcomeUser() {
         }
     }
 
-    function PurchaseCourse(courseId) {
-        // Find the purchased course
-        const purchasedCourse = courses.find(course => course._id === courseId);
-        
-        // Add the purchased course to the local state
-        setPurchasedCourses(prevState => [...prevState, purchasedCourse]);
-        
-        // Alert the user
-        alert('Course purchased successfully');
+    async function PurchaseCourse(courseId) {
+        const stripe=await loadStripe('pk_test_51PdRbPHu5f6jTXuNEhdNnYWdPHOA30nHPfJfHx2ViFxE9t1kNPVUNx9glblushKtdZ9BJvbdHXgSKBFlHRZ82Yl300Af88XG6Q');   
+        const token = localStorage.getItem('token');
+    
+        const courseResponse = await axios.get(`https://edu-tech-admin-xh5s.vercel.app/course/${courseId}`);
+        const course = courseResponse.data;
+        console.log(course);
+    
+        if (!course) {
+            console.log("Course not found");
+            return;
+        }
+    
+        const response = await axios.post(`http://localhost:3000/purchase/${courseId}`, {
+            coursename: course.coursename,
+            price: course.price
+        }, {
+            headers: {
+                token
+            }
+        });
+    
+        const session = response.data; // Access the data directly from response
+        console.log("session "+session);
 
-        // Redirect to purchases page
-        // navigate('/purchases');
+        const result = stripe.redirectToCheckout({
+            sessionId: session.sessionId
+        });
+    
+        if (result.error) {
+            console.log(result.error);
+        }
     }
-
+    
     return (
         <>
             {loading ?

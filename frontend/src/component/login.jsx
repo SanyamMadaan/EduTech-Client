@@ -17,6 +17,8 @@ export function Login() {
         password
       });
 
+      console.log(response);
+
       if (response) {
         const token=response.data.token;
         console.log(token);
@@ -27,6 +29,11 @@ export function Login() {
         alert('no user exists');
       }
     } catch (error) {
+      console.log(error);
+      if(error.response.data.msg){
+        alert(error.response.data.msg)
+        return;
+      }
       alert("Error while logging in..Please try later");
     }
   }
