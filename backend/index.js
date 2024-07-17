@@ -82,6 +82,7 @@ app.post("/purchase/:courseId", async (req, res) => {
 
         // Syntax given from Stripe docs
         const session = await stripe.checkout.sessions.create({
+            src:"https://checkout.stripe.com/checkout.js",
             payment_method_types: ["card"],
             line_items: CourseDetails,
             mode: "payment",
