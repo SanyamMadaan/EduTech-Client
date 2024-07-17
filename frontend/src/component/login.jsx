@@ -11,6 +11,7 @@ export function Login() {
     event.preventDefault(); // Prevent form submission
 
     try {
+      console.log(import.meta.env.VITE_CLIENT_BACKEND_URL);
       const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/login`, {
         email,
         password
@@ -31,23 +32,13 @@ export function Login() {
   }
 
   return (
-    <>
-      <main>
-        <div className="main_page">
-          <div>
-          <h1 >Login </h1>
-          </div>
-          <div className="login_page">
-            <div className="image">
-              <img
-                id="login_image"
-                src="https://img.freepik.com/free-photo/computer-security-with-login-password-padlock_107791-16191.jpg?size=626&ext=jpg"
-                alt="Login"
-              />
-            </div>
-            <div className="forms">
-              <form onSubmit={loginUser}>
+    <div className="bg-black h-screen">
+          <h1 className="text-center text-white font-serif">Login </h1>
+            <div className="lg:flex  mt-10 flex justify-center items-center">
+            <div className="bg-white rounded-md  w-3/4 md:w-1/2 lg:w-1/3 ">
+              <form className="flex flex-col justify-center items-center" onSubmit={loginUser}>
                 <input
+                  className="border-2 border-black  rounded-md p-6 m-2 w-2/3 mt-6"
                   type="email"
                   placeholder="Enter registered email ID"
                   onChange={(e) => {
@@ -58,7 +49,7 @@ export function Login() {
                 <br />
                 <br />
                 <input
-                  id="pass"
+                  className="border-2 border-black  rounded-md p-6 mx-2 mb-0  w-2/3 "
                   type="password"
                   placeholder="Enter Password"
                   onChange={(e) => {
@@ -67,14 +58,13 @@ export function Login() {
                   required
                 />
                 <br />
-                <br />
-                <button id="login_btn" type="submit">
+
+                <button  type="submit">
                   Login
                 </button>
                 <br />
-                <br />
               </form>
-              <div className="change_route">
+              <div className="mb-1 flex justify-center">
                 <p>New user?</p>
                 <p className="path" onClick={() => navigate('/Signup')}>
                   Create Account
@@ -82,8 +72,6 @@ export function Login() {
               </div>
             </div>
           </div>
-        </div>
-      </main>
-    </>
+    </div>
   );
 }

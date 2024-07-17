@@ -41,77 +41,66 @@ export function Signup() {
   }
 
   return (
-    <main>
-      <div className="main_page">
-      <h1>Sign Up </h1>
-        <div className="login_page">
-          <div className="image">
-            <img
-              id="login_image"
-              src="https://img.freepik.com/free-vector/mobile-login-concept-illustration_114360-83.jpg?size=626&ext=jpg&ga=GA1.1.2090071369.1707797469&semt=ais"
-            />
-          </div>
-          <div className="forms">
-            <form onSubmit={handleSubmit}>
-              <input
-                type="text"
-                placeholder="Enter your Mobile number"
-                onChange={(e) => {
-                  setContact(e.target.value);
-                }}
-                required
-              />
-              <br />
-              <br />
-              <input
-                type="email"
-                placeholder="Enter email"
-                onChange={(e) => {
-                  setUsername(e.target.value);
-                }}
-                required
-              />
-              <br />
-              <br />
-              <input
-                id="signpass"
-                type="password"
-                placeholder="Enter Password"
-                onChange={(e) => {
-                  setPassword(e.target.value);
-                }}
-                required
-              />
-              <br />
-              <br />
-              <input
-                id="cpass"
-                type="password"
-                placeholder="Confirm Password"
-                onChange={(e) => {
-                  setCpass(e.target.value);
-                }}
-                required
-              />
-              <br />
-              <br />
-              <button id="signup_btn" type="submit">
-                Signup
-              </button>
-              <br />
-              <br />
-            </form>
-            <div className="change_route">
-            <p>
-              Already a user?
-            </p>
-            <p className="path" onClick={()=>navigate('/')}>
-              Login
-            </p>
+    <div className="bg-black h-screen">
+          <h1 className="text-center text-white font-serif">Sign Up </h1>
+            <div className="lg:flex  mt-10 flex justify-center items-center">
+            <div className="bg-white rounded-md  w-3/4 md:w-1/2 lg:w-1/3 ">
+              <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
+                <input
+                  className="border-2 border-black  rounded-md p-6 m-2 w-2/3 mt-6"
+                  type="email"
+                  placeholder="Enter email address"
+                  onChange={(e) => {
+                    setUsername(e.target.value);
+                    // setEmail(e.target.value);
+                  }}
+                  required
+                />
+                <input
+                  className="border-2 border-black  rounded-md p-6 mx-2  mt-3 w-2/3 "
+                  type="text"
+                  placeholder="Enter Conatct number"
+                  onChange={(e) => {
+                    setContact(e.target.value);
+                    // setPassword(e.target.value);
+                  }}
+                  required
+                />
+                <input
+                  className="border-2 border-black  rounded-md p-6 mx-2 mt-3  w-2/3 "
+                  type="password"
+                  placeholder="Enter Password"
+                  onChange={(e) => {
+                    setPassword(e.target.value);
+                    // setPassword(e.target.value);
+                  }}
+                  required
+                />
+                <input
+                  className="border-2 border-black  rounded-md p-6 mx-2 mt-3  w-2/3 "
+                  type="password"
+                  placeholder="Re-enter Password"
+                  onChange={(e) => {
+                    setCpass(e.target.value)
+                    // setPassword(e.target.value);
+                  }}
+                  required
+                />
+
+
+                <button  type="submit">
+                  Sign Up
+                </button>
+                <br />
+              </form>
+              <div className="mb-1 flex justify-center">
+                <p>Already a user?</p>
+                <p className="path" onClick={() => navigate('/')}>
+                  LOGIN
+                </p>
+              </div>
             </div>
           </div>
-        </div>
-      </div>
-    </main>
+    </div>
   );
 }

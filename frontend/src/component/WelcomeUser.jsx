@@ -49,10 +49,15 @@ export function WelcomeUser() {
                     (<div className="error_msg">{(error === "Network Error") ? <><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQhCz_7R8H3elkwLcQ_zYP_J55iOLZ3VQL9S8lAqZCNXA&s"/></> : <>{error}</>}</div>) :
                     (
                         <div className="dashboard">
-                            <div className="purchase_navbar">
-                                <h2 id="welcome_heading">Welcome to Edutech</h2>
-                                <button id="purchased_courses" onClick={() => navigate('/purchases')}>PURCHASED COURSES</button>
+                            <div className="flex justify-between">
+                            <h2 className="p-1 text-white text-xl ml-2  font-bold">Welcome to Edutech</h2>
+                          
+                            <button id="purchased_courses" className="w-fit h-fit p-1 mr-2" onClick={() => navigate('/purchases')}>PURCHASED COURSES</button>
                             </div>
+                                
+                                
+                                
+                                                                 
                             <h2 id="courseheading">What would you like to <span id="highlight">learn?</span></h2>
                             <div className="displayCourses">
                                 {courses.map((course) => (

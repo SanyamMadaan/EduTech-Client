@@ -1,4 +1,6 @@
-@import url('https://fonts.googleapis.com/css2?family=Lobster&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
 
 *{
   margin:0px;
@@ -15,8 +17,7 @@
 }
 
 .login_page{
-  margin: 0px 250px 0px 250px;
-   padding:20px;
+   padding:10px;
    width:750px;
    border:2px solid black;
    background-color:white;
@@ -130,11 +131,9 @@ form button{
 }
 
 .main_page{
-  margin-left:10px;
-  height:100vh;
   background-color:black;
+  height:100%;
   display:flex;
-  flex-direction: column;
   align-items: center;
   justify-content:center;
 }
@@ -278,7 +277,11 @@ form button{
   .image{
     display:none;
   }
+  .forms{
+    margin-left:20%;
+  }
   .login_page{
+    justify-content: center;
     margin-top:10px;
     width:50%;
   }
