@@ -41,7 +41,7 @@ export function WelcomeUser() {
             return;
         }
     
-        const response = await axios.post(`https://edu-tech-admin-xh5s.vercel.app/purchase/${courseId}`, {
+        const response = await axios.post(`https://edu-tech-client.vercel.app/purchase/${courseId}`, {
             coursename: course.coursename,
             price: course.price
         }, {
