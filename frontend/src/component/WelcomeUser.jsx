@@ -29,7 +29,6 @@ export function WelcomeUser() {
 
     async function PurchaseCourse(courseId) {
         alert('Redirecting you to payment page');
-        alert("Tip: For doing Payment please use Laptop");
         const stripe=await loadStripe('pk_test_51PdRbPHu5f6jTXuNEhdNnYWdPHOA30nHPfJfHx2ViFxE9t1kNPVUNx9glblushKtdZ9BJvbdHXgSKBFlHRZ82Yl300Af88XG6Q');   
         const token = localStorage.getItem('token');
     
@@ -42,7 +41,7 @@ export function WelcomeUser() {
             return;
         }
     
-        const response = await axios.post(`http://localhost:3000/purchase/${courseId}`, {
+        const response = await axios.post(`https://edu-tech-admin-xh5s.vercel.app/purchase/${courseId}`, {
             coursename: course.coursename,
             price: course.price
         }, {
