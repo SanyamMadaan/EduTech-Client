@@ -1,6 +1,5 @@
 const express = require("express");
 require("dotenv").config();
-const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 const Port = process.env.PORT || 3000;
 const { user, Admin, Course } = require("./db");
 const cors = require("cors");
@@ -52,49 +51,7 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/purchase/:courseId", async (req, res) => {
-    const coursename=req.body.coursename;
-    const price=req.body.price;
-    const courseId = req.params.courseId;
-    const token = req.headers.token;
-
-    try {
-        const decoded = jwt.verify(token.split(" ")[1], key); 
-        const userId = decoded.userId;
-
-        const existingUser = await user.findById(userId);
-        
-        if (!existingUser) {
-            return res.status(404).json({ msg: "User not found" });
-        }
-
-        const CourseDetails = [{
-            price_data: {
-                currency: "inr",
-                product_data: {
-                    name:coursename, // Use 'title' instead of 'name'
-                },
-                unit_amount:price * 100,
-            },
-            quantity: 1,
-        }];
-
-        console.log(CourseDetails);
-
-        // Syntax given from Stripe docs
-        const session = await stripe.checkout.sessions.create({
-            src:"https://checkout.stripe.com/checkout.js",
-            payment_method_types: ["card"],
-            line_items: CourseDetails,
-            mode: "payment",
-            success_url: "http://localhost:5173/success", // Corrected 'success' URL
-            cancel_url: "http://localhost:5173/cancel",
-        });
-
-        res.status(200).json({ msg: "Purchase successful", sessionId: session.id });
-    } catch (error) {
-        console.error("Error while purchasing course:", error);
-        res.status(500).json({ msg: "Error while purchasing course", error: error.message });
-    }
+    
 });
 
 app.get("/purchases", async (req, res) => {

@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
 import { useNavigate } from "react-router-dom";
-import {loadStripe} from '@stripe/stripe-js';
 
 export function WelcomeUser() {
     const [courses, setCourses] = useState([]);
@@ -28,38 +27,7 @@ export function WelcomeUser() {
     }
 
     async function PurchaseCourse(courseId) {
-        alert('Redirecting you to payment page');
-        const stripe=await loadStripe('pk_test_51PdRbPHu5f6jTXuNEhdNnYWdPHOA30nHPfJfHx2ViFxE9t1kNPVUNx9glblushKtdZ9BJvbdHXgSKBFlHRZ82Yl300Af88XG6Q');   
-        const token = localStorage.getItem('token');
-    
-        const courseResponse = await axios.get(`https://edu-tech-admin-xh5s.vercel.app/course/${courseId}`);
-        const course = courseResponse.data;
-        console.log(course);
-    
-        if (!course) {
-            console.log("Course not found");
-            return;
-        }
-    
-        const response = await axios.post(`https://edu-tech-client.vercel.app/purchase/${courseId}`, {
-            coursename: course.coursename,
-            price: course.price
-        }, {
-            headers: {
-                token
-            }
-        });
-    
-        const session = response.data; // Access the data directly from response
-        console.log("session "+session);
-
-        const result = stripe.redirectToCheckout({
-            sessionId: session.sessionId
-        });
-    
-        if (result.error) {
-            console.log(result.error);
-        }
+        
     }
     
     return (
@@ -93,8 +61,6 @@ export function WelcomeUser() {
                                     </div>
                                 ))}
                             </div>
-                            {/* Render PurchasedCourses component with purchasedCourses state
-                            <PurchasedCourses purchasedCourses={purchasedCourses} /> */}
                         </div>
                     )
             }

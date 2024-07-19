@@ -44,12 +44,12 @@ export function Login() {
 
   return (
     <div className="bg-black h-screen">
-          <h1 className="text-center text-white font-serif">Login </h1>
+          <h1 className="text-center text-white">Login </h1>
             <div className="lg:flex  mt-10 flex justify-center items-center">
             <div className="bg-white rounded-md  w-3/4 md:w-1/2 lg:w-1/3 ">
               <form className="flex flex-col justify-center items-center" onSubmit={loginUser}>
                 <input
-                  className="border-2 border-black  rounded-md p-6 m-2 w-2/3 mt-6"
+                  className="border-2 border-black mb-0  p-6 lg:mx-2 mx-1   w-4/5 lg:w-2/3 mt-6"
                   type="email"
                   placeholder="Enter registered email ID"
                   onChange={(e) => {
@@ -60,7 +60,7 @@ export function Login() {
                 <br />
                 <br />
                 <input
-                  className="border-2 border-black  rounded-md p-6 mx-2 mb-0  w-2/3 "
+                  className="border-2 border-black mb-0  p-6 lg:mx-2 mx-1   w-4/5 lg:w-2/3 "
                   type="password"
                   placeholder="Enter Password"
                   onChange={(e) => {
@@ -70,12 +70,12 @@ export function Login() {
                 />
                 <br />
 
-                <button  type="submit">
+                <button className="bg-green-600 uppercase font-bold border-0 mb-0"  type="submit">
                   {btn}
                 </button>
                 <br />
               </form>
-              <div className="mb-1 flex justify-center">
+              <div className="mb-2 flex justify-center">
                 <p>New user?</p>
                 <p className="path" onClick={() => navigate('/Signup')}>
                   Create Account

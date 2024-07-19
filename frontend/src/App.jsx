@@ -3,8 +3,6 @@ import { Signup } from './component/Signup.jsx';
 import{BrowserRouter,Routes,Route} from 'react-router-dom';
 import { WelcomeUser } from './component/WelcomeUser.jsx';
 import { PurchasedCourses } from './component/PurchasedCourses.jsx';
-import { Cancel } from './component/Cancel.jsx';
-import { Success } from './component/Success.jsx';
 
 function App() {
   return (
@@ -15,8 +13,6 @@ function App() {
           <Route path="/signup" element={<Signup></Signup>}></Route>
           <Route path="/Welcome" element={<WelcomeUser></WelcomeUser>}></Route>
           <Route path="/purchases" element={<PurchasedCourses></PurchasedCourses>}></Route>
-          <Route path="/success" element={<Success/>}></Route>
-          <Route path="/cancel" element={<Cancel/>}></Route>
          </Routes>
       </BrowserRouter>
     </>

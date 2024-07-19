@@ -45,12 +45,12 @@ export function Signup() {
 
   return (
     <div className="bg-black h-screen">
-          <h1 className="text-center text-white font-serif">Sign Up </h1>
+          <h1 className="text-center text-white ">Sign Up </h1>
             <div className="lg:flex  mt-10 flex justify-center items-center">
             <div className="bg-white rounded-md  w-3/4 md:w-1/2 lg:w-1/3 ">
               <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
                 <input
-                  className="border-2 border-black  rounded-md p-6 m-2 w-2/3 mt-6"
+                  className="border-2 border-black p-6 m-2 lg:w-2/3 w-3/4 mt-6"
                   type="email"
                   placeholder="Enter email address"
                   onChange={(e) => {
@@ -60,7 +60,7 @@ export function Signup() {
                   required
                 />
                 <input
-                  className="border-2 border-black  rounded-md p-6 mx-2  mt-3 w-2/3 "
+                  className="border-2 border-black  p-6 mx-2  mt-3 w-3/4 lg:w-2/3 "
                   type="text"
                   placeholder="Enter Conatct number"
                   onChange={(e) => {
@@ -70,7 +70,7 @@ export function Signup() {
                   required
                 />
                 <input
-                  className="border-2 border-black  rounded-md p-6 mx-2 mt-3  w-2/3 "
+                  className="border-2 border-black   p-6 mx-2 mt-3 w-3/4  lg:w-2/3 "
                   type="password"
                   placeholder="Enter Password"
                   onChange={(e) => {
@@ -80,7 +80,7 @@ export function Signup() {
                   required
                 />
                 <input
-                  className="border-2 border-black  rounded-md p-6 mx-2 mt-3  w-2/3 "
+                  className="border-2 border-black   p-6 mx-2 mb-0 mt-3 w-3/4 lg:w-2/3 "
                   type="password"
                   placeholder="Re-enter Password"
                   onChange={(e) => {
@@ -91,12 +91,12 @@ export function Signup() {
                 />
 
 
-                <button  type="submit">
+                <button className="bg-green-700 mb-0"  type="submit">
                   {btn}
                 </button>
                 <br />
               </form>
-              <div className="mb-1 flex justify-center">
+              <div className="mb-2 mt-0 flex justify-center">
                 <p>Already a user?</p>
                 <p className="path" onClick={() => navigate('/')}>
                   LOGIN
