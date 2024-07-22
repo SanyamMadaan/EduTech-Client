@@ -7,11 +7,17 @@ const dotenv = require("dotenv");
 const jwt = require("jsonwebtoken");
 const key = process.env.key;
 const app = express();
+const Razorpay=require('razorpay')
 
 dotenv.config();
 
 app.use(express.json());
 app.use(cors());
+
+const instance = new Razorpay({
+  key_id: process.env.RAZORPAY_API_KEY,
+  key_secret: process.env.RAZORPAY_API_SECRET,
+});
 
 app.post("/login", async (req, res) => {
   const { email, password } = req.body;
@@ -51,8 +57,27 @@ app.post("/signup", async (req, res) => {
 });
 
 app.post("/purchase/:courseId", async (req, res) => {
-    
+  const price=req.body.price;
+  const courseId=req.params.courseId;
+
+  const options = {
+    amount: Number(price*100),  // amount in the smallest currency unit
+    currency: "INR"
+  };
+
+  const order=await instance.orders.create(options);
+  console.log(order);
+
+  res.status(200).json({
+    success:true,
+    order
+  });  
 });
+
+app.get('/getApiKey',(req,res)=>{
+  const key=process.env.RAZORPAY_API_KEY;
+  res.status(200).json({key});
+})
 
 app.get("/purchases", async (req, res) => {
   const token = req.headers.authorization;

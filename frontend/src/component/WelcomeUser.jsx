@@ -26,7 +26,32 @@ export function WelcomeUser() {
         }
     }
 
-    async function PurchaseCourse(courseId) {
+    async function PurchaseCourse(courseId,price) {
+    
+        //get order
+        let response=await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/purchase/${courseId}`,{price});
+        response=response.data; 
+        console.log(response);
+        
+        let key=await axios.get(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/getApiKey`);
+        key=key.data;
+        console.log(key);
+
+        const options = {
+            key:key,
+            amount: price,
+            currency: "INR",
+            order_id: response.order.id,
+            // callback_url: `${import.meta.env.VITE_CLIENT_BACKEND_URL}/verifyPayment, //this route will verify the payment
+            theme: {
+                "color": "#3399cc"
+            }
+        };
+
+        const rzp1 = new Razorpay(options);
+            rzp1.open();
+            e.preventDefault();
+
         
     }
     
@@ -56,7 +81,7 @@ export function WelcomeUser() {
                                         <p id="coursedescription">{course.description}</p>
                                         <h3 id="courseprice">₹{course.price}</h3>
                                         <div className="purchasesection">
-                                            <button className="purchasebtn" id="PurchaseBtn" onClick={() => PurchaseCourse(course._id)}>Buy Now</button>
+                                            <button className="purchasebtn" id="PurchaseBtn" onClick={() => PurchaseCourse(course._id,course.price)}>Buy Now</button>
                                         </div>
                                     </div>
                                 ))}

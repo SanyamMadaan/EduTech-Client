@@ -1,11 +1,13 @@
 import React from "react";
+import { useState } from "react";
 
-export function PurchasedCourses({ purchasedCourses }) {
+export function PurchasedCourses() {
+    const[purchases,setPurchases]=useState([]);
     return (
         <div className="purchased_courses">
             <ul>
-                {purchasedCourses && purchasedCourses.length > 0 ? (
-                    purchasedCourses.map(course => (
+                {purchases && purchases.length > 0 ? (
+                    purchases.map(course => (
                         <li key={course._id}>{course.coursename}</li>
                     ))
                 ) : (
