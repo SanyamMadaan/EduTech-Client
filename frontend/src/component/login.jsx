@@ -14,8 +14,7 @@ export function Login() {
 
     try {
       setBtn("Logging in...");
-      console.log(import.meta.env.VITE_CLIENT_BACKEND_URL);
-      const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/login`, {
+      const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/User/login`, {
         email,
         password
       });

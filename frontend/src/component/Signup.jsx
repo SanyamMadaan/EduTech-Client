@@ -16,10 +16,19 @@ export function Signup() {
     event.preventDefault();
         if (cpass !== password) {
       alert("Password and Confirm Password doesn't match");
-    } else {
+      setBtn("Sign Up");
+    }else if(contact.length<10){
+      alert('Mobile number length should be atleast 10');
+      setBtn("Sign Up");
+    }
+    else if(contact.length>10){
+      alert('Mobile number length should not be greater than 10');
+      setBtn("Sign Up");
+    } 
+    else {
       async function CreateUser() {
         try {
-          const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/signup`, {
+          const response = await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/User/signup`, {
             email: username,
             contact,
             password
@@ -31,12 +40,18 @@ export function Signup() {
               localStorage.setItem("token","Bearer "+token);
             alert('Congratulations, Your account created Successfully');
             navigate('/Welcome');
-          } else {
-            alert('Error while creating user');
           }
-        } catch (error) {
+        } 
+        catch (error) {
+          console.log(error);
+          console.log(error.response);
           setBtn("Sign Up");
-          alert("Error while Creating account.Please try later");
+          if(error.response.data.msg){
+            alert(error.response.data.msg);
+          }
+          else{
+            alert("Error while Creating account.Please try later");
+          }
         }
       }
       CreateUser();

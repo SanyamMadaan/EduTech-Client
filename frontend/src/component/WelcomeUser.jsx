@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
 import axios from 'axios';
+import {jwtDecode} from 'jwt-decode';
 import { useNavigate } from "react-router-dom";
 
 export function WelcomeUser() {
     const [courses, setCourses] = useState([]);
-    const [purchasedCourses, setPurchasedCourses] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
 
@@ -16,7 +16,7 @@ export function WelcomeUser() {
 
     async function fetchCourses() {
         try {
-            const response = await axios.get(`${import.meta.env.VITE_ADMIN_BACKEND_URL}/allcourses`);
+            const response = await axios.get(`${import.meta.env.VITE_ADMIN_BACKEND_URL}/course/allcourses`);
             setCourses(response.data);
             setLoading(false);
         } catch (e) {
@@ -26,35 +26,74 @@ export function WelcomeUser() {
         }
     }
 
-    async function PurchaseCourse(courseId,price) {
+    async function PurchaseCourse(courseId) {
+        let token = localStorage.getItem('token').split(' ')[1];
+        const decoded = jwtDecode(token);
+        const userId = decoded.userId;
+        console.log("User ID: ", userId);
     
-        //get order
-        let response=await axios.post(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/purchase/${courseId}`,{price});
-        response=response.data; 
-        console.log(response);
+        alert('Redirecting you to the Payment Page');
         
-        let key=await axios.get(`${import.meta.env.VITE_CLIENT_BACKEND_URL}/getApiKey`);
-        key=key.data;
-        console.log(key);
-
-        const options = {
-            key:key,
-            amount: price,
-            currency: "INR",
-            order_id: response.order.id,
-            // callback_url: `${import.meta.env.VITE_CLIENT_BACKEND_URL}/verifyPayment, //this route will verify the payment
-            theme: {
-                "color": "#3399cc"
-            }
-        };
-
-        const rzp1 = new Razorpay(options);
+        try {
+            // Step 1: Create order in the backend
+            let response = await axios.post(`${import.meta.env.VITE_ADMIN_BACKEND_URL}/User/purchase/${courseId}`, {
+                userId: userId
+            });
+            response = response.data;
+            console.log("Order Response: ", response);
+    
+            // Step 2: Get Razorpay API key from backend
+            let keyResponse = await axios.get(`${import.meta.env.VITE_ADMIN_BACKEND_URL}/User/getApiKey`);
+            let key = keyResponse.data;
+            console.log("Razorpay API Key: ", key);
+    
+            // Step 3: Prepare Razorpay options
+            const options = {
+                key: key,
+                amount: response.order.amount, // in paise (100 paise = 1 INR)
+                currency: response.order.currency,
+                order_id: response.order.id, // Razorpay order ID
+                callback_url: `${import.meta.env.VITE_ADMIN_BACKEND_URL}/verifypayment`, // Verification route
+                prefill: {
+                    name: "Your Name", // Prefill user data (optional)
+                    email: "email@example.com", // Prefill user email
+                },
+                theme: {
+                    color: "#3399cc",
+                },
+                handler: function (response) {
+                    console.log("Payment handler response: ", response);
+                    const { razorpay_order_id, razorpay_payment_id, razorpay_signature } = response;
+    
+                    // Step 4: Call the backend to verify the payment
+                    axios.post(`${import.meta.env.VITE_ADMIN_BACKEND_URL}/User/verifypayment`, {
+                        razorpay_order_id,
+                        razorpay_payment_id,
+                        razorpay_signature,
+                        courseId, // Send courseId from the purchase step
+                        userId    // Send userId for adding course
+                    }).then((verifyResponse) => {
+                        if (verifyResponse.data.success) {
+                            alert("Payment successful and course added!");
+                        } else {
+                            alert("Payment verification failed");
+                        }
+                    }).catch((error) => {
+                        console.error("Error in payment verification: ", error);
+                        alert("Error verifying payment. Please try again.");
+                    });
+                },
+            };
+    
+            // Step 5: Open Razorpay Checkout widget
+            const rzp1 = new Razorpay(options);
             rzp1.open();
-            e.preventDefault();
-
-        
+        } catch (error) {
+            console.log('Payment initiation failed: ', error);
+            alert('Payment initiation failed. Please try again later.');
+        }
     }
-    
+        
     return (
         <>
             {loading ?
@@ -81,7 +120,7 @@ export function WelcomeUser() {
                                         <p id="coursedescription">{course.description}</p>
                                         <h3 id="courseprice">₹{course.price}</h3>
                                         <div className="purchasesection">
-                                            <button className="purchasebtn" id="PurchaseBtn" onClick={() => PurchaseCourse(course._id,course.price)}>Buy Now</button>
+                                            <button className="purchasebtn" id="PurchaseBtn" onClick={() => PurchaseCourse(course._id)}>Buy Now</button>
                                         </div>
                                     </div>
                                 ))}
