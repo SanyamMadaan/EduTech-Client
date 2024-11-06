@@ -42,13 +42,12 @@ export function Login() {
   }
 
   return (
-    <div className="bg-black h-screen">
-          <h1 className="text-center text-white">Login </h1>
-            <div className="lg:flex  mt-10 flex justify-center items-center">
-            <div className="bg-white rounded-md  w-3/4 md:w-1/2 lg:w-1/3 ">
-              <form className="flex flex-col justify-center items-center" onSubmit={loginUser}>
+    <div className="bg-black h-screen flex justify-center items-center">
+            <div className=" w-full mx-4 sm:mx-8 h-fit pt-2 lg:w-5/12  bg-slate-900 rounded-lg">
+              <h1 className="font-semibold text-white ">Login</h1>
+              <form className="flex flex-col justify-center items-center mt-2 lg:mt-0" onSubmit={loginUser}>
                 <input
-                  className="border-2 border-black mb-0  p-6 lg:mx-2 mx-1   w-4/5 lg:w-2/3 mt-6"
+                  className="border-2 border-black sm:p-6 sm:w-1/2 p-7 w-2/3 lg:p-7 lg:w-3/4  rounded-md mt-4"
                   type="email"
                   placeholder="Enter registered email ID"
                   onChange={(e) => {
@@ -56,10 +55,8 @@ export function Login() {
                   }}
                   required
                 />
-                <br />
-                <br />
                 <input
-                  className="border-2 border-black mb-0  p-6 lg:mx-2 mx-1   w-4/5 lg:w-2/3 "
+                  className="border-2 border-black sm:p-6 sm:w-1/2 p-7 w-2/3 rounded-md mt-8 lg:w-3/4 lg:p-7"
                   type="password"
                   placeholder="Enter Password"
                   onChange={(e) => {
@@ -67,20 +64,17 @@ export function Login() {
                   }}
                   required
                 />
-                <br />
-
-                <button className="bg-green-600 uppercase font-bold border-0 mb-0"  type="submit">
+                <button className="bg-green-600 uppercase font-bold border-0 p-4 mt-6 lg:font-bold"  type="submit">
                   {btn}
                 </button>
-                <br />
               </form>
-              <div className="mb-2 flex justify-center">
-                <p>New user?</p>
-                <p className="path" onClick={() => navigate('/Signup')}>
+              <div className="mt-4 flex justify-center mb-2">
+                <p className="text-white p-2 text-xl">New user?</p>
+                <p className="text-xl p-2 text-red-600 cursor-pointer" onClick={() => navigate('/Signup')}>
                   Create Account
                 </p>
               </div>
-            </div>
+            
           </div>
     </div>
   );

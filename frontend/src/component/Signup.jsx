@@ -59,65 +59,57 @@ export function Signup() {
   }
 
   return (
-    <div className="bg-black h-screen">
-          <h1 className="text-center text-white ">Sign Up </h1>
-            <div className="lg:flex  mt-10 flex justify-center items-center">
-            <div className="bg-white rounded-md  w-3/4 md:w-1/2 lg:w-1/3 ">
+    <div className="bg-black h-screen flex justify-center items-center">
+            <div className=" w-full mx-6  sm:mx-8  h-fit pt-2 lg:pt-0 lg:w-5/12  bg-slate-900 rounded-lg">
+              <h1 className="font-semibold text-white ">Sign UP</h1>
               <form className="flex flex-col justify-center items-center" onSubmit={handleSubmit}>
                 <input
-                  className="border-2 border-black p-6 m-2 lg:w-2/3 w-3/4 mt-6"
+                  className="border-2 border-black sm:py-6 sm:px-7 sm:w-2/3 p-6 w-3/4 lg:p-7 lg:w-2/3  rounded-md mt-4"
                   type="email"
-                  placeholder="Enter email address"
+                  placeholder="Please Enter your Email address"
                   onChange={(e) => {
                     setUsername(e.target.value);
-                    // setEmail(e.target.value);
                   }}
                   required
                 />
                 <input
-                  className="border-2 border-black  p-6 mx-2  mt-3 w-3/4 lg:w-2/3 "
-                  type="text"
-                  placeholder="Enter Conatct number"
+                  className="border-2 border-black sm:py-6 sm:px-7 sm:w-2/3 p-6 w-3/4 lg:p-7 lg:w-2/3  rounded-md mt-4"
+                  type="number"
+                  placeholder="Please Enter Mobile number"
                   onChange={(e) => {
                     setContact(e.target.value);
-                    // setPassword(e.target.value);
                   }}
                   required
                 />
                 <input
-                  className="border-2 border-black   p-6 mx-2 mt-3 w-3/4  lg:w-2/3 "
+                  className="border-2 border-black sm:py-6 sm:px-7 sm:w-2/3 p-6 w-3/4 rounded-md mt-4 lg:p-7 lg:w-2/3"
                   type="password"
                   placeholder="Enter Password"
                   onChange={(e) => {
                     setPassword(e.target.value);
-                    // setPassword(e.target.value);
                   }}
                   required
                 />
-                <input
-                  className="border-2 border-black   p-6 mx-2 mb-0 mt-3 w-3/4 lg:w-2/3 "
-                  type="password"
-                  placeholder="Re-enter Password"
+                  <input
+                  className="border-2 border-black sm:py-6 sm:px-7 sm:w-2/3 p-6 w-3/4 rounded-md mt-4 lg:p-7 lg:w-2/3"
+                  type="Re-enter the password"
+                  placeholder="Enter Password"
                   onChange={(e) => {
-                    setCpass(e.target.value)
-                    // setPassword(e.target.value);
+                    setCpass(e.target.value);
                   }}
                   required
                 />
-
-
-                <button className="bg-green-700 mb-0"  type="submit">
+                <button className="bg-green-600 uppercase font-bold border-0 p-3 mt-4 lg:font-bold"  type="submit">
                   {btn}
                 </button>
-                <br />
               </form>
-              <div className="mb-2 mt-0 flex justify-center">
-                <p>Already a user?</p>
-                <p className="path" onClick={() => navigate('/')}>
-                  LOGIN
+              <div className="flex justify-center mb-2 lg:mb-0">
+                <p className="text-white p-2 lg:p-1 text-xl">Existing User?</p>
+                <p className="text-xl p-2 lg:p-1 text-red-600 cursor-pointer" onClick={() => navigate('/')}>
+                  Sign In
                 </p>
               </div>
-            </div>
+            
           </div>
     </div>
   );
